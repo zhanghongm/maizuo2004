@@ -1,23 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
+import filmRouter from './routers/films';
+import cinemasRouter from './routers/cinemas';
+import centerRouter from './routers/center'
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    redirect:'/films/nowPlaying'
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+  // 导出的是个数组，要展开
+  // 其他都是对象
+  ...filmRouter,
+  cinemasRouter,
+  centerRouter
 ]
 
 const router = new VueRouter({
